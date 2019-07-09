@@ -1,5 +1,24 @@
-<!-- helper functions for fast building -->
 <?php 
+//helper functions for fast building
+
+//function for setting the message 
+function setMessage($msg){
+if (!empty($msg)) {
+    $_SESSION['message'] = $msg;
+} else {
+    $msg = "";
+}
+}
+
+// display message function
+function displayMessage() {
+    if (isset($_SESSION['message'])) {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
+}
+
+
 // redirecting function
 function redirect($location) {
     header("Location: $location");
@@ -125,6 +144,25 @@ echo $product;
 };
 }
 
+
+function userLogin() {
+
+    if(isset($_POST['submit'])){
+        $username = escape_string($_POST['username']);
+        $password = escape_string($_POST['password']);
+
+        $query = query("SELECT * FROM users WHERE username ='{$username}' AND password='{$password}' ");
+
+        if (mysqli_num_rows($query) ==0) {
+
+            setMessage("Wrong Username or Password");
+            redirect("login.php");
+        } else {
+            redirect("admin");
+        }
+    }
+
+}
 
 
 
