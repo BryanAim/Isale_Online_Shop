@@ -17,6 +17,7 @@ defined("DB_NAME") ? null: define("DB_NAME","isaleHomestore_db");
 
 // create connection to the databases using mysqli
 $connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+
 // function.php file
 require_once("functions.php");
 
