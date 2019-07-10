@@ -2,6 +2,7 @@
 
 ob_start();
 session_start();
+// session_destroy();
 // paths definitions with constants
 defined("DS") ? null: define("DS", DIRECTORY_SEPARATOR);
 // front-end
