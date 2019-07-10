@@ -164,6 +164,29 @@ function userLogin() {
 
 }
 
+// for sending message from contact form
+function sendMessage(){
+    if(isset($_POST['submit'])){
+        $to       ="bryanaim00@gmail.com";
+        $fromName =$_POST['name'];
+        $subject  =$_POST['subject'];
+        $email    =$_POST['email'];
+        $message  =$_POST['message'];
+
+        $headers ="From: {$fromName} {$email} ";
+
+        $result = mail($to, $subject, $message, $headers);
+
+        if (!$result) {
+            setMessage("Sorry, we could not send your email");
+            redirect("contact.php");
+        } else {
+            setMessage("Your Email has been sent!");
+            redirect("contact.php");
+        }
+    }
+}
+
 
 
 
