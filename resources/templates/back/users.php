@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Isale Homestore Admin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -46,14 +46,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="index.html">Isale Homestore Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-              <li class="dropdown">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                       
+
                         <li class="divider"></li>
                         <li>
                             <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
@@ -73,14 +73,14 @@
                     <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Add Product</a>
                     </li>
-                    
+
                     <li>
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Categories</a>
                     </li>
                     <li>
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>Orders</a>
                     </li>
-                
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -94,82 +94,79 @@
 
 
 
-                    <div class="col-lg-12">
-                      
-
-                        <h1 class="page-header">
-                            Users
-                         
-                        </h1>
-                          <p class="bg-success">
-                            <?php echo $message; ?>
-                        </p>
-
-                        <a href="add_user.php" class="btn btn-primary">Add User</a>
+                <div class="col-lg-12">
 
 
-                        <div class="col-md-12">
+                    <h1 class="page-header">
+                        Users
 
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Photo</th>
-                                        <th>Username</th>
-                                        <th>First Name</th>
-                                        <th>Last Name </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    </h1>
+                    <p class="bg-success">
+                        <?php echo $message; ?>
+                    </p>
+
+                    <a href="add_user.php" class="btn btn-primary">Add User</a>
+
+
+                    <div class="col-md-12">
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Photo</th>
+                                    <th>Username</th>
+                                    <th>First Name</th>
+                                    <th>Last Name </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
                                 <?php foreach($users as $user): ?>
 
-                                    <tr>
+                                <tr>
 
-                                        <td>2</td>
-                                        <td><img class="admin-user-thumbnail user_image" src="placehold.it/62x62" alt=""></td>
-                                        
-                                        <td>Rico
-                                              <div class="action_links">
+                                    <td>2</td>
+                                    <td><img class="admin-user-thumbnail user_image" src="placehold.it/62x62" alt=""></td>
 
-                                                <a href="">Delete</a>
-                                                <a href="">Edit</a>
-                    
-                                                
-                                            </div>
-                                        </td>
-                                        
-                                        
-                                        <td>Edwin</td>
-                                       <td>Diaz</td>
-                                    </tr>
+                                    <td>Rico
+                                        <div class="action_links">
+
+                                            <a href="">Delete</a>
+                                            <a href="">Edit</a>
+
+
+                                        </div>
+                                    </td>
+
+
+                                    <td>Edwin</td>
+                                    <td>Diaz</td>
+                                </tr>
 
 
                                 <?php endforeach; ?>
 
 
-                                    
-                                    
-                                </tbody>
-                            </table> <!--End of Table-->
-                        
-
-                        </div>
 
 
+                            </tbody>
+                        </table>
+                        <!--End of Table-->
 
 
-
-
-
-
-
-
-                        
                     </div>
-    
 
 
+
+
+
+
+
+
+
+
+                </div>
 
 
 

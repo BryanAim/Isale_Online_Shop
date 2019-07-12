@@ -66,7 +66,7 @@ function getProducts() {
             <h4><a href="item.php?id={$row['product_id']}">{$row['product_name']}</a>
             </h4>
             <p>{$row['short_description']}</p>
-            <a class="btn btn-primary" target="_blank" href="cart.php?add={$row['product_id']}">Add to Cart</a>
+            <a class="btn btn-primary" target="_blank" href="../resources/cart.php?add={$row['product_id']}">Add to Cart</a>
         </div>
     </div>
     </div>
@@ -158,6 +158,8 @@ function userLogin() {
             setMessage("Wrong Username or Password");
             redirect("login.php");
         } else {
+
+            $_SESSION['username'] = $username;
             redirect("admin");
         }
     }
@@ -219,10 +221,10 @@ function cart() {
             <td>{$value}</td>
             <td>Ksh {$subtotal}</td>
             <td>
-            <a class="btn btn-warning" href="cart.php?remove={$row['product_id']}"><span class="glyphicon glyphicon-minus"></span></a>
+            <a class="btn btn-warning" href="../resources/cart.php?remove={$row['product_id']}"><span class="glyphicon glyphicon-minus"></span></a>
             
-            <a class="btn btn-success" href="cart.php?add={$row['product_id']}"><span class="glyphicon glyphicon-plus"></span></a>
-            <a class="btn btn-danger" href="cart.php?delete={$row['product_id']}"><span class="glyphicon glyphicon-remove"></span></a>
+            <a class="btn btn-success" href="../resources/cart.php?add={$row['product_id']}"><span class="glyphicon glyphicon-plus"></span></a>
+            <a class="btn btn-danger" href="../resources/cart.php?delete={$row['product_id']}"><span class="glyphicon glyphicon-remove"></span></a>
             </td> 
             
         </tr>   

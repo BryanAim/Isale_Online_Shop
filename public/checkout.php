@@ -1,5 +1,4 @@
 <?php require_once("../resources/config.php"); ?>
-<?php require_once("../public/cart.php"); ?>
 
 <!-- modularised. header here -->
 <?php include(TEMPLATE_FRONT . DS . "header.php"); ?>
