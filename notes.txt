@@ -1,2 +1,4 @@
 *add name to logout
 *add product image on edit product o68
+*show message after product added o72
+*display images at checkout, esit product and categories page o79

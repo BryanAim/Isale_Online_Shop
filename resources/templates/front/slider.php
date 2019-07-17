@@ -11,13 +11,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="item active">
-                    <img class="slide-image" src="../resources/images/800x300.jpg" alt="">
+                    <img class="slide-image" src="../resources/uploads/800x300.jpg" alt="">
                 </div>
                 <div class="item">
-                    <img class="slide-image" src="../resources/images/800x300.jpg" alt="">
+                    <img class="slide-image" src="../resources/uploads/800x300.jpg" alt="">
                 </div>
                 <div class="item">
-                    <img class="slide-image" src="../resources/images/800x300.jpg" alt="">
+                    <img class="slide-image" src="../resources/uploads/800x300.jpg" alt="">
                 </div>
             </div>
             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">

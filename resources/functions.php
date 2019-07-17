@@ -1,4 +1,7 @@
 <?php 
+
+// function for picture upload directory
+$upload_directory = "uploads";
 //helper functions for fast building
 
 //function for setting the message 
@@ -55,12 +58,14 @@ function getProducts() {
     // confirm($query);
 
     while($row = fetch_array($query)) {
+
+        $product_image= displayImage($row['product_image']);
         // HERODOC
     $product = <<<DELIMITER
     <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
 
-        <a href= "item.php?id={$row['product_id']}"><img src="../resources/images/320x150.jpg" alt=""></a> 
+        <a href= "item.php?id={$row['product_id']}"><img src="../resources/{$product_image}" alt=""></a> 
         <div class="caption">
             <h4 class="pull-right"> Ksh {$row['product_price']}</h4>
             <h4><a href="item.php?id={$row['product_id']}">{$row['product_name']}</a>
@@ -97,11 +102,14 @@ function getProductsInCategories() {
     // confirm($query);
 
     while($row = fetch_array($query)) {
+
+        // $product_image = displayImage($row['product_image']);
         // HERODOC
     $product = <<<DELIMITER
     <div class="col-md-3 col-sm-6 hero-feature">
         <div class="thumbnail">
-            <img src="{$row['product_image']}" alt="">
+        
+            <img src="{$row['product_image']}">
             <div class="caption">
                 <h3>{$row['product_name']}</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -128,7 +136,7 @@ function getProductsInShop() {
     $product = <<<DELIMITER
     <div class="col-md-3 col-sm-6 hero-feature">
         <div class="thumbnail">
-            <img src="{$row['product_image']}" alt="">
+            <img src="../resources/uploads/{$row['product_image']}" alt="">
             <div class="caption">
                 <h3>{$row['product_name']}</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -212,11 +220,16 @@ function cart() {
             // item quantities
 
             $item_quantity+=$value;
+
+           // $product_image= displayImage($row['product_image']);
             
         $product = <<<DELIMITER
 
         <tr>
-            <td>{$row['product_name']}</td>
+            <td>{$row['product_name']} <br>
+            <img width=100 src="../resources/uploads/{$row['product_image']}">
+            
+            </td>
             <td>Ksh {$row['product_price']}</td>
             <td>{$value}</td>
             <td>Ksh {$subtotal}</td>
@@ -244,6 +257,225 @@ DELIMITER;
  
 
 }
+
+/****************** BACKEND FUNCTIONS ***********/
+
+
+
+// function for displaying images, whose directory is defined at top
+
+function displayImage($picture) {
+    global $upload_directory;
+    return $upload_directory . DS . $picture;
+}
+
+/*********** Admin Products***** */
+function adminGetProducts() {
+    $query = query("SELECT * FROM products");
+
+    while($row = fetch_array($query)) {
+
+        $category = showProductCategoryTitle($row['product_category_id']);
+
+       $product_image= displayImage($row['product_image']);
+
+        // HERODOC
+    $product = <<<DELIMITER
+    <tr>
+        <td>{$row['product_id']}</td>
+        <td> <a href="index.php?edit_product&id={$row['product_id']}">  {$row['product_name']}</a><br>
+            <img width=100 src="../../resources/{$product_image}" alt="">
+        </td>
+        <td>{$category}</td>
+        <td>{$row['product_price']}</td>
+        <td>{$row['product_quantity']}</td>
+        <td> <a class="btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['product_id']}"> <span class="glyphicon glyphicon-remove"></span> </a></td>
+    </tr>
+
+DELIMITER;
+    echo $product;
+    };
+
+}
+
+// Function that shows product category title. to relate category and products table
+function showProductCategoryTitle($product_category_id) {
+$category_query = query("SELECT * FROM categories WHERE category_id= '{$product_category_id}'");
+
+while ($category_row = fetch_array($category_query)) {
+    return $category_row['category_title'];
+}
+
+}
+
+/********** ADDING PRODUCT IN ADMIN *****/
+
+function addProduct() {
+
+if(isset($_POST['publish'])) {
+
+
+$product_name           = escape_string($_POST['product_name']);
+$product_category_id    = escape_string($_POST['product_category_id']);
+$short_description      = escape_string($_POST['short_description']);
+$product_description    = escape_string($_POST['product_description']);
+$product_price          = escape_string($_POST['product_price']);
+$product_quantity       = escape_string($_POST['product_quantity']);
+$product_image          = escape_string($_FILES['file']['name']);
+$image_temp_location    = escape_string($_FILES['file']['tmp_name']);
+
+move_uploaded_file($image_temp_location  , UPLOAD_DIRECTORY . DS . $product_image);
+
+
+$query = query("INSERT INTO products(product_name, product_category_id,short_description, product_description, product_price, product_quantity, product_image) VALUES('{$product_name}', '{$product_category_id}', '{$short_description}', '{$product_description}', '{$product_price}', '{$product_quantity}', '{$product_image}')");
+// $last_id = last_id();
+
+// set_message("New Product was Added");
+redirect("index.php?products");
+    
+}
+
+
+}
+
+// Editing Products from admin page
+
+function editProduct() {
+
+if(isset($_POST['update'])) {
+
+
+$product_name           = escape_string($_POST['product_name']);
+$product_category_id    = escape_string($_POST['product_category_id']);
+$short_description      = escape_string($_POST['short_description']);
+$product_description    = escape_string($_POST['product_description']);
+$product_price          = escape_string($_POST['product_price']);
+$product_quantity       = escape_string($_POST['product_quantity']);
+$product_image          = escape_string($_FILES['file']['name']);
+$image_temp_location    = escape_string($_FILES['file']['tmp_name']);
+
+// check if should update image
+if (empty($product_image)) {
+    $get_pic = query("SELECT product_image FROM products WHERE product_id=" . escape_string . " ");
+
+    while ($pic = fetch_array($get_pic)) {
+        $product_image= $pic['product_image'];
+    }
+}
+
+move_uploaded_file($image_temp_location  , UPLOAD_DIRECTORY . DS . $product_image);
+
+
+$query ="UPDATE products SET ";
+$query .="product_name         = '{$product_name}'        , ";
+$query .="product_category_id  = '{$produc_category_id}'  , ";
+$query .="product_price        = '{$product_price}'       , ";
+$query .="product_description  = '{$product_description}' , ";
+$query .="short_description    = '{$short_description}'   , ";
+$query .="product_quantity     = '{$product_quantity}'    , ";
+$query .="product_image        = '{$product_image}'         ";
+$query .="WHERE product_id=" . escape_string($_GET['id']);
+
+$send_update_query= query($query);
+
+// set_message("New Product was Added");
+redirect("index.php?products");
+    
+}
+
+
+}
+
+// showing  categories function in admins' add product page
+function showCategoriesAddProductPage(){
+     $query =query("SELECT * FROM categories");
+    //    confirm($query);
+        while ($row = mysqli_fetch_array($query)) {
+        
+            $categories_option = <<<DELIMITER
+
+    <option value="{$row['category_id']}">{$row['category_title']}</option>
+
+DELIMITER;
+          
+    echo $categories_option;
+        };
+}
+
+/************CATEGORIES IN ADMIN********* */
+
+function showCategoriesInAdmin() {
+    $category_query= query("SELECT * FROM categories");
+
+    while ($row= fetch_array($category_query)) {
+        $cat_id= $row['category_id'];
+        $cat_name= $row['category_title'];
+
+        $category = <<<DELIMITER
+
+<tr>
+    <td>{$cat_id}</td>
+    <td>{$cat_name}</td>
+   <td><a class="btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['category_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+
+</tr>
+
+
+DELIMITER;
+echo $category;
+    }
+
+    
+}
+
+function addCategory() {
+
+    if (isset($_POST['add_category'])) {
+        $cat_name= escape_string($_POST['category_title']);
+
+        if(empty($cat_name) || $cat_name == " ") {
+
+echo "<p class='bg-danger'>THIS CANNOT BE EMPTY</p>";
+
+
+} else {
+
+        $insert_category = query("INSERT INTO categories(cat_title)VALUES('{$cat_name}') ");
+        // set_message("Category Created");
+
+        }        
+    }
+}
+
+/**********Admin Users ***********/
+function displayUsers() {
+    $users_query= query("SELECT * FROM users");
+
+    while ($row= fetch_array($users_query)) {
+        $user_id= $row['user_id'];
+        $username= $row['username'];
+        $email= $row['email'];
+        $password= $row['password'];
+
+        $user = <<<DELIMITER
+
+<tr>
+    <td>{$user_id}</td>
+    <td>{$username}</td>
+    <td>{$email}</td>
+   <td><a class="btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['user_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+
+</tr>
+
+
+DELIMITER;
+echo $user;
+    }
+
+    
+}
+
+
 
 
 ?>
