@@ -7,15 +7,12 @@
 
        <!-- Side Navigation -->
 
-            <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-<?php 
-       getCategories();
-?>
-            </div>
+           <?php
+           include(TEMPLATE_FRONT . DS . "side_nav.php");
+           ?>
 <?php
 $query = query("SELECT * FROM products WHERE product_id = " . escape_string($_GET['id']) ." ");
-
+confirm($query);
 
 while($row = fetch_array($query)) :
 
@@ -27,7 +24,7 @@ while($row = fetch_array($query)) :
 <div class="row">
 
     <div class="col-md-7">
-              <img class="img-responsive" src="../resources/uploads/{$row['product_image']}" alt="">
+              <img class="img-responsive" src="../resources/<?php  echo displayImage($row['product_image']); ?>" alt="">
 
 
     </div>
@@ -38,11 +35,19 @@ while($row = fetch_array($query)) :
          
 
     <div class="caption-full">
-        <h4><a href="#"><?php echo $row['product_name'];?></a> </h4>
+        <h4><a href="#">
+        <?php
+        echo $row['product_name'];
+        ?>
+        </a> </h4>
         <hr>
-        <h4 class="">Ksh <?php echo $row['product_price'];?></h4>
+        <h4 class="">Ksh 
+        <?php
+         echo $row['product_price'];
+         ?>
+          /=</h4>
 
-    <div class="ratings">
+    <!-- <div class="ratings">
      
         <p>
             <span class="glyphicon glyphicon-star"></span>
@@ -52,9 +57,12 @@ while($row = fetch_array($query)) :
             <span class="glyphicon glyphicon-star-empty"></span>
             4.0 stars
         </p>
-    </div>
+    </div> -->
           
-        <p><?php echo $row['product_description'];?></p>
+        <p><?php
+         echo $row['short_description'];
+         ?>
+         </p>
 
    
     <form action="">
@@ -85,7 +93,7 @@ while($row = fetch_array($query)) :
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+    <!-- <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li> -->
 
   </ul>
 
@@ -95,15 +103,16 @@ while($row = fetch_array($query)) :
 
 <p></p>
            
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    <p>
+    <?php
+     echo $row['product_description']; 
+     ?>
+     </p>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    
 
     </div>
-    <div role="tabpanel" class="tab-pane" id="profile">
+    <!-- <div role="tabpanel" class="tab-pane" id="profile">
 
   <div class="col-md-6">
 
@@ -191,7 +200,7 @@ while($row = fetch_array($query)) :
             </div>
         </form>
 
-    </div>
+    </div> -->
 
  </div>
 

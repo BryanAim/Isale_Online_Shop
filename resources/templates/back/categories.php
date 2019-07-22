@@ -9,6 +9,12 @@ addCategory();
 
 </h1>
 
+<h2>
+<?php
+displayMessage();
+?>
+</h2>
+
 
 <div class="col-md-4">
 

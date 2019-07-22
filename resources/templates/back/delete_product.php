@@ -8,7 +8,7 @@ $query = query("DELETE FROM products WHERE product_id = " . escape_string($_GET[
 
 
 
-set_message("Product Deleted");
+setMessage("Product Deleted");
 redirect("../../../public/admin/index.php?products");
 
 
@@ -18,10 +18,5 @@ redirect("../../../public/admin/index.php?products");
 
 
 }
-
-
-
-
-
 
  ?>

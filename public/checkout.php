@@ -50,10 +50,7 @@ echo isset($_SESSION['item_quantity']) ? $_SESSION['item_quantity'] : $_SESSION[
 
 ?></span></td>
 </tr>
-<tr class="shipping">
-<th>Shipping and Handling</th>
-<td>Free Shipping</td>
-</tr>
+
 
 <tr class="order-total">
 <th>Order Total</th>

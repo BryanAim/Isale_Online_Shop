@@ -17,6 +17,10 @@ if (!isset($_SESSION['username'])) {
                         <h1 class="page-header">
                             Dashboard <small>Statistics Overview</small>
                         </h1>
+                        <h2>
+                        <?php displayMessage();
+                        ?>
+                        </h2>
                         <ol class="breadcrumb">
                             <li class="active">
                                 <i class="fa fa-dashboard"></i> Dashboard
@@ -32,9 +36,6 @@ if (!isset($_SESSION['username'])) {
      include(TEMPLATE_BACK . "/AdminContent.php");
  }
 
-if (isset($_GET['orders'])) {
-    include(TEMPLATE_BACK . "/orders.php");
-}
 
 if (isset($_GET['categories'])) {
     include(TEMPLATE_BACK . "/categories.php");
@@ -62,8 +63,17 @@ if (isset($_GET['add_user'])) {
 if(isset($_GET['edit_user'])){
     include(TEMPLATE_BACK . "/edit_user.php");
 
-
 }
+
+if (isset($_GET['slides'])) {
+    include(TEMPLATE_BACK . "/slides.php");
+}
+
+if (isset($_GET['delete_slide_id'])) {
+    include(TEMPLATE_BACK . "/delete_slide.php");
+}
+
+
 
 
  ?>

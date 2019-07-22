@@ -1,35 +1,28 @@
-
 <!-- Configuration-->
-
 <?php require_once("../resources/config.php"); ?>
-
 
 <!-- Header-->
 <?php include(TEMPLATE_FRONT .  "/header.php");?>
 
-
-     <!--Navigation -->
-
-
-
-         <!-- Contact Section -->
+        <!-- Contact Section -->
 
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Contact Us</h2>
-<?php
-sendMessage();
-?>
-
                     <h3 class="section-subheading"><?php
-displayMessage();
-?></h3>
+                    displayMessage();
+?>
+</h3>
+
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <form name="sentMessage" id="contactForm" method="POST" >
+                    <?php
+                    sendMessage();
+                    ?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

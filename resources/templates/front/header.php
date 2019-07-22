@@ -31,6 +31,11 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
         <!-- nav here -->
-        <?php include(TEMPLATE_FRONT . DS . "top_nav.php"); ?>
+        <?php 
+        include(TEMPLATE_FRONT . DS . "top_nav.php");
+         ?>
+
+         
     </nav>

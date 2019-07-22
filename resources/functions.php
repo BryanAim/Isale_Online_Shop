@@ -4,19 +4,29 @@
 $upload_directory = "uploads";
 //helper functions for fast building
 
-//function for setting the message 
+function last_id(){
+
+global $connection;
+
+return mysqli_insert_id($connection);
+
+
+}
+
+//function for setting the messages 
 function setMessage($msg){
 if (!empty($msg)) {
     $_SESSION['message'] = $msg;
 } else {
     $msg = "";
-}
+    }
 }
 
 // display message function
 function displayMessage() {
     if (isset($_SESSION['message'])) {
         echo $_SESSION['message'];
+        //unset so that when you refresh its not there
         unset($_SESSION['message']);
     }
 }
@@ -26,7 +36,7 @@ function displayMessage() {
 function redirect($location) {
     header("Location: $location");
 };
-
+// for querying from the database
 function query($sql) {
 
     global $connection;
@@ -36,11 +46,12 @@ function query($sql) {
 function confirm($result) {
     
     global $connection;
-    if($result){
+    if(!$result){
         die("QUERY FAILED ". mysqli_error($connection));
-    };
-    
+    };    
 };
+
+// to prevent sql injections
 function escape_string($string){
     global $connection;
     return mysqli_real_escape_string($connection, $string);
@@ -52,10 +63,10 @@ function fetch_array($result) {
 
 
 /*************************FRONT END FUNCTIONS************/
-// function for getting products
+// function for getting products and display them on homepage
 function getProducts() {
     $query = query("SELECT * FROM products");
-    // confirm($query);
+    confirm($query);
 
     while($row = fetch_array($query)) {
 
@@ -65,7 +76,7 @@ function getProducts() {
     <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
 
-        <a href= "item.php?id={$row['product_id']}"><img src="../resources/{$product_image}" alt=""></a> 
+        <a href= "item.php?id={$row['product_id']}"><img style="height:150px"  src="../resources/{$product_image}" alt=""></a> 
         <div class="caption">
             <h4 class="pull-right"> Ksh {$row['product_price']}</h4>
             <h4><a href="item.php?id={$row['product_id']}">{$row['product_name']}</a>
@@ -84,8 +95,8 @@ DELIMITER;
 // get categories function
 function getCategories(){
      $query =query("SELECT * FROM categories");
-    //    confirm($query);
-        while ($row = mysqli_fetch_array($query)) {
+       confirm($query);
+        while ($row = fetch_array($query)) {
         
             $categories_list = <<<DELIMITER
 
@@ -94,27 +105,27 @@ function getCategories(){
 DELIMITER;
           
     echo $categories_list;
-        };
+        }
 }
 
 function getProductsInCategories() {
     $query = query("SELECT * FROM products WHERE product_category_id = " . escape_string($_GET['id']). " ");
-    // confirm($query);
+    confirm($query);
 
     while($row = fetch_array($query)) {
 
-        // $product_image = displayImage($row['product_image']);
+        $product_image = displayImage($row['product_image']);
         // HERODOC
     $product = <<<DELIMITER
     <div class="col-md-3 col-sm-6 hero-feature">
         <div class="thumbnail">
         
-            <img src="{$row['product_image']}">
+            <img src="../resources/{$product_image}">
             <div class="caption">
                 <h3>{$row['product_name']}</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 <p>
-                    <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                    <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
                 </p>
             </div>
         </div>
@@ -141,7 +152,7 @@ function getProductsInShop() {
                 <h3>{$row['product_name']}</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 <p>
-                    <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                    <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
                 </p>
             </div>
         </div>
@@ -160,13 +171,15 @@ function userLogin() {
         $password = escape_string($_POST['password']);
 
         $query = query("SELECT * FROM users WHERE username ='{$username}' AND password='{$password}' ");
+        confirm($query);
 
         if (mysqli_num_rows($query) ==0) {
 
             setMessage("Wrong Username or Password");
             redirect("login.php");
-        } else {
 
+        } else {
+            setMessage("Welcome to Admin Dashboard {$username} !");
             $_SESSION['username'] = $username;
             redirect("admin");
         }
@@ -184,7 +197,7 @@ function sendMessage(){
         $message  =$_POST['message'];
 
         $headers ="From: {$fromName} {$email} ";
-
+// mail function isnt so reliable though
         $result = mail($to, $subject, $message, $headers);
 
         if (!$result) {
@@ -206,7 +219,7 @@ function cart() {
 
         if (substr($name, 0, 8)=="product_") {
         //to get the length of the string 
-            $length = strlen($name)-8;
+            $length = strlen($name);
 
             $id = substr($name, 8, $length);
 
@@ -272,6 +285,7 @@ function displayImage($picture) {
 /*********** Admin Products***** */
 function adminGetProducts() {
     $query = query("SELECT * FROM products");
+    confirm($query);
 
     while($row = fetch_array($query)) {
 
@@ -283,8 +297,14 @@ function adminGetProducts() {
     $product = <<<DELIMITER
     <tr>
         <td>{$row['product_id']}</td>
-        <td> <a href="index.php?edit_product&id={$row['product_id']}">  {$row['product_name']}</a><br>
-            <img width=100 src="../../resources/{$product_image}" alt="">
+        <td> 
+        <a href="index.php?edit_product&id={$row['product_id']}"><p>{$row['product_name']}</p></a>
+
+            <div>
+
+          <a href="index.php?edit_product&id={$row['product_id']}">  <img width='100' src="../../resources/{$product_image}" alt=""></a>
+
+            </div>
         </td>
         <td>{$category}</td>
         <td>{$row['product_price']}</td>
@@ -301,6 +321,7 @@ DELIMITER;
 // Function that shows product category title. to relate category and products table
 function showProductCategoryTitle($product_category_id) {
 $category_query = query("SELECT * FROM categories WHERE category_id= '{$product_category_id}'");
+confirm($category_query);
 
 while ($category_row = fetch_array($category_query)) {
     return $category_row['category_title'];
@@ -328,9 +349,10 @@ move_uploaded_file($image_temp_location  , UPLOAD_DIRECTORY . DS . $product_imag
 
 
 $query = query("INSERT INTO products(product_name, product_category_id,short_description, product_description, product_price, product_quantity, product_image) VALUES('{$product_name}', '{$product_category_id}', '{$short_description}', '{$product_description}', '{$product_price}', '{$product_quantity}', '{$product_image}')");
-// $last_id = last_id();
+$last_id = last_id();
+confirm($query);
 
-// set_message("New Product was Added");
+setMessage("New Product with id {$last_id} was Added");
 redirect("index.php?products");
     
 }
@@ -356,7 +378,8 @@ $image_temp_location    = escape_string($_FILES['file']['tmp_name']);
 
 // check if should update image
 if (empty($product_image)) {
-    $get_pic = query("SELECT product_image FROM products WHERE product_id=" . escape_string . " ");
+    $get_pic = query("SELECT product_image FROM products WHERE product_id=" . escape_string($_GET['id']). " ");
+    confirm($get_pic);
 
     while ($pic = fetch_array($get_pic)) {
         $product_image= $pic['product_image'];
@@ -377,8 +400,9 @@ $query .="product_image        = '{$product_image}'         ";
 $query .="WHERE product_id=" . escape_string($_GET['id']);
 
 $send_update_query= query($query);
+confirm($send_update_query);
 
-// set_message("New Product was Added");
+setMessage("Product has been updated!");
 redirect("index.php?products");
     
 }
@@ -389,7 +413,8 @@ redirect("index.php?products");
 // showing  categories function in admins' add product page
 function showCategoriesAddProductPage(){
      $query =query("SELECT * FROM categories");
-    //    confirm($query);
+       confirm($query);
+
         while ($row = mysqli_fetch_array($query)) {
         
             $categories_option = <<<DELIMITER
@@ -406,6 +431,7 @@ DELIMITER;
 
 function showCategoriesInAdmin() {
     $category_query= query("SELECT * FROM categories");
+    confirm($category_query);
 
     while ($row= fetch_array($category_query)) {
         $cat_id= $row['category_id'];
@@ -440,8 +466,9 @@ echo "<p class='bg-danger'>THIS CANNOT BE EMPTY</p>";
 
 } else {
 
-        $insert_category = query("INSERT INTO categories(cat_title)VALUES('{$cat_name}') ");
-        // set_message("Category Created");
+        $insert_category = query("INSERT INTO categories(category_title)VALUES('{$cat_name}') ");
+        confirm($insert_category);
+        setMessage("New Category Created");
 
         }        
     }
@@ -450,6 +477,7 @@ echo "<p class='bg-danger'>THIS CANNOT BE EMPTY</p>";
 /**********Admin Users ***********/
 function displayUsers() {
     $users_query= query("SELECT * FROM users");
+    confirm($users_query);
 
     while ($row= fetch_array($users_query)) {
         $user_id= $row['user_id'];
@@ -493,17 +521,163 @@ $password   = escape_string($_POST['password']);
 $query = query("INSERT INTO users(username,email,password) VALUES('{$username}','{$email}','{$password}')");
 
 
-// set_message("USER CREATED");
+setMessage("New User Created");
 
 redirect("index.php?users");
 
+}
 
+}
+
+/******************Slides Functions *******************/
+
+function addSlides() {
+
+
+if(isset($_POST['add_slide'])) {
+
+
+$slide_name        = escape_string($_POST['slide_name']);
+$slide_image        = escape_string($_FILES['file']['name']);
+$slide_image_loc    = escape_string($_FILES['file']['tmp_name']);
+
+
+if(empty($slide_name) || empty($slide_image)) {
+
+echo "<p class='bg-danger'>This field cannot be empty</p>";
+
+
+} else {
+
+
+
+move_uploaded_file($slide_image_loc, UPLOAD_DIRECTORY . DS . $slide_image);
+
+$query = query("INSERT INTO slides(slide_name, slide_image) VALUES('{$slide_name}', '{$slide_image}')");
+confirm($query);
+setMessage("Slide Added");
+redirect("index.php?slides");
+                }
+        }
+}
+
+
+
+function getCurrentSlideInAdmin(){
+
+$query = query("SELECT * FROM slides ORDER BY slide_id DESC LIMIT 1");
+confirm($query);
+
+while($row = fetch_array($query)) {
+
+$slide_image = displayImage($row['slide_image']);
+
+$slide_active_admin = <<<DELIMETER
+
+
+
+    <img class="img-responsive" src="../../resources/{$slide_image}" alt="">
+
+
+
+DELIMETER;
+
+echo $slide_active_admin;
+    }
+}
+
+
+function getActiveSlide() {
+
+$query = query("SELECT * FROM slides ORDER BY slide_id DESC LIMIT 1");
+confirm($query);
+
+
+
+while($row = fetch_array($query)) {
+
+$slide_image = displayImage($row['slide_image']);
+
+$slide_active = <<<DELIMETER
+
+
+ <div class="item active">
+    <img class="slide-image" src="../resources/{$slide_image}" alt="">
+</div>
+
+
+DELIMETER;
+
+echo $slide_active;
+    }
 
 }
 
 
 
+function getSlides() {
+
+$query = query("SELECT * FROM slides");
+confirm($query);
+
+while($row = fetch_array($query)) {
+
+$slide_image = displayImage($row['slide_image']);
+
+$slides = <<<DELIMETER
+
+
+ <div class="item">
+    <img class="slide-image" src="../resources/{$slide_image}" alt="">
+</div>
+
+
+DELIMETER;
+
+echo $slides;
+
 }
+
+}
+
+
+function getSlideThumbnails(){
+
+
+$query = query("SELECT * FROM slides ORDER BY slide_id ASC ");
+confirm($query);
+
+while($row = fetch_array($query)) {
+
+$slide_image = displayImage($row['slide_image']);
+
+$slide_thumb_admin = <<<DELIMETER
+
+
+<div class="col-xs-6 col-md-3 image_container">
+    
+    <a href="index.php?delete_slide_id={$row['slide_id']}">
+        
+         <img  class="img-responsive slide_image" src="../../resources/{$slide_image}" alt="">
+
+
+    </a>
+
+    <div class="caption">
+
+    <p>{$row['slide_name']}</p>
+
+    </div>
+</div>
+
+
+DELIMETER;
+
+echo $slide_thumb_admin;
+    }
+
+}
+
 
 
 

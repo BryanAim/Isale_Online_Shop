@@ -3,9 +3,11 @@
 ob_start();
 session_start();
 // session_destroy();
-// paths definitions with constants
+// paths definitions with constants.. DS-Directory Separator
+//__DIR__ = magic constant
 defined("DS") ? null: define("DS", DIRECTORY_SEPARATOR);
 // front-end
+
 defined("TEMPLATE_FRONT") ? null: define("TEMPLATE_FRONT", __DIR__ . DS . "templates/front");
 // backend
 defined("TEMPLATE_BACK") ? null: define("TEMPLATE_BACK", __DIR__ . DS . "templates/back");

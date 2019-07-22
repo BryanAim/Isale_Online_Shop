@@ -4,9 +4,6 @@
             <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
         </li>
         <li>
-            <a href="index.php?orders"><i class="fa fa-fw fa-bar-chart-o"></i> Orders</a>
-        </li>
-        <li>
             <a href="index.php?products"><i class="fa fa-fw fa-bar-chart-o"></i> View Products</a>
         </li>
         <li>
@@ -18,6 +15,9 @@
         </li>
         <li>
             <a href="index.php?users"><i class="fa fa-fw fa-wrench"></i>Users</a>
+        </li>
+        <li>
+            <a href="index.php?slides"><i class="fa fa-fw fa-wrench"></i>Slides</a>
         </li>
     
     </ul>
