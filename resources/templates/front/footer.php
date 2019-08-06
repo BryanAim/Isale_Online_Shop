@@ -5,7 +5,7 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 text-center">
                     <p>Copyright &copy; Isale Homestore</p>
                 </div>
             </div>

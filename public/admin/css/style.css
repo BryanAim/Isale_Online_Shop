@@ -1,8 +1,18 @@
 #page-wrapper {
+  /* background-image: linear-gradient(#fff, lightskyblue) !important; */
   background-color: #F1F1F1 !important;
 }
-
-
+.btn-primary {
+  color: #fff;
+  background-color: #ff10d3;
+  border-color: #ff10d3;
+}
+h1,
+h2,
+h3,
+h4 {
+  color: #ff10d3;
+}
 
 .product_image {
 
@@ -33,3 +43,27 @@ width: 49%;
 
 }
 
+.jumbotron {
+  background-color:lightskyblue;
+}
+.navbar-inverse .navbar-brand {
+  color: lightskyblue;
+}
+.navbar-inverse .navbar-nav>li>a {
+  color: lightskyblue;
+}
+
+.navbar-inverse {
+  background-color: #000;
+  border-color: #fff;
+}
+#wrapper {
+  background-color: #000;
+  padding-left: 0;
+}
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover {
+  color: #fff;
+  background-color: #ff10d3;
+}

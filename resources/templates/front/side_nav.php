@@ -1,5 +1,5 @@
 <div class="col-md-3">
-    <p class="lead">Isale Homestore</p>
+    <p class="lead text-center">Categories</p>
     <div class="list-group">
 
     <?php 

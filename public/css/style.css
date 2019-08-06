@@ -1,3 +1,81 @@
+h1,h2,h4 {
+    color: lightskyblue;
+}
+a {
+    color: lightskyblue;
+}
+.lead {
+    color:lightskyblue;
+}
+.thumbnail,
+.form-control,
+.list-group-item {
+    border: 1px solid lightskyblue;
+   
+}
+
+
 .caption {
     height: 158px;
+}
+.navbar-inverse {
+    background-color: #fff;
+    border-color: lightskyblue;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: lightskyblue;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: lightskyblue;
+}
+
+.navbar-brand {
+    padding: 8px 15px;
+ 
+}
+.btn-primary,
+.btn {
+    color: #fff;
+    background-color: lightskyblue;
+    border-color: lightskyblue;
+}
+.btn:hover,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #ff10d3;
+    border-color: lightblue;
+}
+.navbar-inverse .navbar-text {
+    color: #ff10d3;
+}
+
+.carousel-indicators .active {
+    background-color: lightskyblue;
+}
+.carousel-control .glyphicon-chevron-right,
+.carousel-control .icon-next {
+    color: lightskyblue;
+}
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .icon-prev {
+    color: lightskyblue;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus,
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #ff10d3;
+    background-color: transparent
+}
+.navbar-inverse .navbar-toggle {
+    border-color: lightskyblue;
+}
+
+.navbar-inverse .navbar-toggle:focus,
+.navbar-inverse .navbar-toggle:hover {
+    background-color: #ff10d3;
 }
