@@ -187,6 +187,46 @@ function userLogin() {
 
 }
 
+function customerLogin() {
+
+    if(isset($_POST['submit'])){
+        $email = escape_string($_POST['email']);
+        $password = escape_string($_POST['password']);
+
+        $query = query("SELECT * FROM customers WHERE customer_email ='{$email}' AND customer_password='{$password}' ");
+        confirm($query);
+
+        if (mysqli_num_rows($query) ==0) {
+
+            setMessage("Wrong Email or Password");
+            redirect("user-login.php");
+
+        } else {
+            $_SESSION['email'] = $email;
+            redirect("../public/index.php");
+        }
+    }
+
+}
+
+function customerSignUp() {
+
+    if(isset($_POST['submit'])){
+        $fullName = escape_string($_POST['fullName']);
+        $mobileNo = escape_string($_POST['mobile']);
+
+        $email = escape_string($_POST['email']);
+        $password = escape_string($_POST['password']);
+
+        $query = query("INSERT INTO customers(customer_name, customer_number,customer_email, customer_password) VALUES('{$fullName}', '{$mobileNo}', '{$email}', '{$password}')");
+// $last_id = last_id();
+confirm($query);
+        confirm($query);
+
+       redirect("../public/index.php");
+    }
+}
+
 // for sending message from contact form
 function sendMessage(){
     if(isset($_POST['submit'])){

@@ -15,6 +15,9 @@
                     <li>
                         <a href="shop.php">Shop</a>
                     </li>
+                    <li>
+                        <a href="user-login.php">Login</a>
+                    </li>
                     
                      <li>
                         <a href="checkout.php">Checkout</a>
@@ -25,11 +28,11 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="login.php">Login</a>
+                        <a href="login.php">Admin Login</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="admin">Admin</a>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>

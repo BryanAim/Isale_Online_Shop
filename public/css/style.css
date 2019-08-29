@@ -36,7 +36,7 @@ a {
 .btn-primary,
 .btn {
     color: #fff;
-    background-color: lightskyblue;
+    /* background-color: lightskyblue; */
     border-color: lightskyblue;
 }
 .btn:hover,
@@ -47,8 +47,8 @@ a {
 .btn-primary.active,
 .open>.dropdown-toggle.btn-primary {
     color: #fff;
-    background-color: #ff10d3;
-    border-color: lightblue;
+    /* background-color: #ff10d3; */
+    /* border-color: lightblue; */
 }
 .navbar-inverse .navbar-text {
     color: #ff10d3;
