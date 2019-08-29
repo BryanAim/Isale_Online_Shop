@@ -7,7 +7,7 @@
     <div class="container">
 
       <header>
-            <h1 class="text-center">Login</h1>
+            <h1 class="text-center">Admin Login</h1>
             <h2 class="text-center">
             <?php 
             displayMessage();

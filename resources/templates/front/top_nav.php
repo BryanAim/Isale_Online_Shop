@@ -30,9 +30,9 @@
                     <li>
                         <a href="login.php">Admin Login</a>
                     </li>
-                    <!-- <li>
+                    <li>
                         <a href="admin">Admin</a>
-                    </li> -->
+                    </li>
 
                 </ul>
             </div>

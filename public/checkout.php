@@ -69,6 +69,11 @@ echo isset($_SESSION['item_total']) ? $_SESSION['item_total'] : $_SESSION['item_
 
 </table>
 
+<div class="pay-now">
+<input type="number" name="" id="" placeholder="Your Phone Number">
+<button> Pay Now</button>
+</div>
+
 </div><!-- CART TOTALS-->
 
 

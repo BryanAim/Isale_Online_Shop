@@ -6,11 +6,11 @@
     <div class="container">
 
         <!-- Jumbotron Header -->
-        <header class="jumbotron hero-spacer">
+        <header class="jumbotron hero-spacer text-center">
             <h1>Isale Homestore</h1>
             <p>Home of your favourite Home Items.</p>
-            <p><a class="btn btn-primary btn-large">Call to action!</a>
-            </p>
+            <!-- <p><a class="btn btn-primary btn-large">Call to action!</a>
+            </p> -->
         </header>
 
         <hr>
@@ -33,7 +33,6 @@ getProductsInCategories();
         </div>
         <!-- /.row -->
 
-        <hr>
 
 <!-- footer here -->
     <?php include(TEMPLATE_FRONT . DS . "footer.php"); ?>

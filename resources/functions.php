@@ -123,9 +123,9 @@ function getProductsInCategories() {
             <img src="../resources/{$product_image}">
             <div class="caption">
                 <h3>{$row['product_name']}</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                
                 <p>
-                    <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                    <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default more-info">More Info</a>
                 </p>
             </div>
         </div>
@@ -150,9 +150,9 @@ function getProductsInShop() {
             <img src="../resources/uploads/{$row['product_image']}" alt="">
             <div class="caption">
                 <h3>{$row['product_name']}</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                
                 <p>
-                    <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                    <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default more-info">More Info</a>
                 </p>
             </div>
         </div>

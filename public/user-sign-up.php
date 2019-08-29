@@ -35,6 +35,9 @@
                 <div class="form-group">
                   <input type="submit" name="submit" class="btn btn-primary" >
                 </div>
+                <div class="form-group">
+                  <p>Already a member? <a href="../public/user-login.php">Log In</a> Instead</p>
+                </div>
             </form>
         </div>  
 

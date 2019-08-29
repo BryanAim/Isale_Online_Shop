@@ -29,6 +29,9 @@
                 <div class="form-group">
                   <input type="submit" name="submit" class="btn btn-primary" >
                 </div>
+                <div class="form-group">
+                  <p>New Here? <a href="../public/user-sign-up.php">Sign up</a></p>
+                </div>
             </form>
         </div>  
 
