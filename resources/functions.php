@@ -2,6 +2,8 @@
 
 // function for picture upload directory
 $upload_directory = "uploads";
+
+
 //helper functions for fast building
 
 function last_id(){
@@ -10,28 +12,7 @@ global $connection;
 
 return mysqli_insert_id($connection);
 
-
 }
-
-//function for setting the messages 
-function setMessage($msg){
-if (!empty($msg)) {
-    $_SESSION['message'] = $msg;
-} else {
-    $msg = "";
-    }
-}
-
-// display message function
-function displayMessage() {
-    if (isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
-        //unset so that when you refresh its not there
-        unset($_SESSION['message']);
-    }
-}
-
-
 // redirecting function
 function redirect($location) {
     header("Location: $location");
@@ -60,6 +41,27 @@ function escape_string($string){
 function fetch_array($result) {
     return mysqli_fetch_array($result);
 };
+
+//function for setting the messages 
+function setMessage($msg){
+if (!empty($msg)) {
+    $_SESSION['message'] = $msg;
+} else {
+    $msg = "";
+    }
+}
+
+// display message function
+function displayMessage() {
+    if (isset($_SESSION['message'])) {
+        echo $_SESSION['message'];
+        //unset so that when you refresh its not there
+        unset($_SESSION['message']);
+    }
+}
+
+
+
 
 
 /*************************FRONT END FUNCTIONS************/
@@ -203,7 +205,7 @@ function customerLogin() {
 
         } else {
             $_SESSION['email'] = $email;
-            redirect("../public/index.php");
+            redirect("../public/home.php");
         }
     }
 
@@ -223,7 +225,7 @@ function customerSignUp() {
 confirm($query);
         confirm($query);
 
-       redirect("../public/index.php");
+       redirect("../public/home.php");
     }
 }
 

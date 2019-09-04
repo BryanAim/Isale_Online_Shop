@@ -1,7 +1,7 @@
 <?php require_once("../resources/config.php"); ?>
 
 <!-- modularised header here -->
-<?php include(TEMPLATE_FRONT . DS . "header.php"); ?>
+<?php include(TEMPLATE_FRONT . DS . "header-sign-up.php"); ?>
 
     <!-- Page Content -->
     <div class="container">
@@ -30,7 +30,7 @@
                   <input type="submit" name="submit" class="btn btn-primary" >
                 </div>
                 <div class="form-group">
-                  <p>New Here? <a href="../public/user-sign-up.php">Sign up</a></p>
+                  <p>New Here? <a href="../public/index.php">Sign up</a></p>
                 </div>
             </form>
         </div>  

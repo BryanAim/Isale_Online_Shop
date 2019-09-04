@@ -1,44 +1,58 @@
 <?php require_once("../resources/config.php"); ?>
 
-<!-- modularised. header here -->
-<?php include(TEMPLATE_FRONT . DS . "header.php"); ?>
+<!-- modularised header here -->
+<?php include(TEMPLATE_FRONT . DS . "header-sign-up.php"); ?>
 
     <!-- Page Content -->
     <div class="container">
 
-        <div class="row">
-
-<!-- side nav/  categories here -->
-   <?php include(TEMPLATE_FRONT . DS . "side_nav.php"); ?>  
-          <div class="col-md-9">
-
-                <div class="row carousel-holder">
-
-                    <div class="col-md-12">
-<!-- sliders here -->
-            <?php
-            include(TEMPLATE_FRONT . DS . "slider.php");
+      <header>
+            <h1 class="text-center">User Sign Up</h1>
+            <h2 class="text-center">
+            <?php 
+            displayMessage();
             ?>
+            </h2>
+        <div class="col-sm-4 col-sm-offset-5">         
+            <form class="" action="" method="post" enctype="multipart/form-data">
 
-                    </div>
-
+            <?php
+            customerSignUp();
+            ?>
+            <div class="form-group"><label for="name">
+                    Your Name<input type="text" name="fullName" placeholder="Full Name" class="form-control" required></label>
+                </div>
+                <div class="form-group"><label for="number">
+                    Phone Number<input type="number" name="mobileNo" placeholder="Phone Number" class="form-control" required></label>
+                </div>
+                <div class="form-group"><label for="">
+                    Email<input type="email" name="email" placeholder="example@email.com" class="form-control" required></label>
+                </div>
+                 <div class="form-group"><label for="password">
+                    Password<input type="password" name="password" placeholder="Your Password" class="form-control" required></label>
                 </div>
 
-                <div class="row">
-
-                <?php
-                getProducts();
-                ?>
-                    
-
+                <div class="form-group">
+                  <input type="submit" name="submit" class="btn btn-primary" >
                 </div>
+                <div class="form-group">
+                  <p>Already a member? <a href="../public/user-login.php">Log In</a> Instead</p>
+                </div>
+            </form>
+        </div>  
 
-            </div>
+
+    </header>
+
 
         </div>
 
     </div>
     <!-- /.container -->
-    
-<!-- footer here -->
+
+    <div class="container">
+
+
+
+        <!-- footer here -->
     <?php include(TEMPLATE_FRONT . DS . "footer.php"); ?>

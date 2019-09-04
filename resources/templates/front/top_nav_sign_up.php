@@ -7,23 +7,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="home.php"><img width="70em"src="../public/images/logo/homestore.png" alt=""></a>
+                <a class="navbar-brand" href="#"><img width="70em"src="../public/images/logo/homestore.png" alt=""></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="shop.php">Shop</a>
-                    </li>
-                    <!-- <li>
-                        <a href="user-login.php">Login</a>
-                    </li> -->
-                    
-                     <li>
-                        <a href="checkout.php">Checkout</a>
+                        <!-- <a href="shop.php">Shop</a> -->
                     </li>
                     <li>
-                        <a href="contact.php">Contact</a>
+                        <a href="user-login.php">Login</a>
+                    </li>
+                    
+                     <li>
+                        <!-- <a href="checkout.php">Checkout</a> -->
+                    </li>
+                    <li>
+                        <!-- <a href="contact.php">Contact</a> -->
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -31,7 +31,7 @@
                         <a href="login.php">Admin Login</a>
                     </li>
                     <li>
-                        <a href="admin">Admin</a>
+                        <!-- <a href="admin">Admin</a> -->
                     </li>
 
                 </ul>

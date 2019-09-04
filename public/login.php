@@ -1,7 +1,7 @@
 <?php require_once("../resources/config.php"); ?>
 
 <!-- modularised header here -->
-<?php include(TEMPLATE_FRONT . DS . "header.php"); ?>
+<?php include(TEMPLATE_FRONT . DS . "header-sign-up.php"); ?>
 
     <!-- Page Content -->
     <div class="container">
