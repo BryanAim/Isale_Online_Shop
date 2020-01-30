@@ -1,4 +1,4 @@
-#Shopping Cart
+# Shopping Cart
 A shopping cart implemented using **Php & mySQL**.
 ### Functionalities:
 
